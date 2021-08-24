@@ -1,0 +1,94 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    background-color: white;
+}
+
+.container{
+    font-family: "Helvetica Neue";
+}
+
+.heading {
+    text-align: center;
+    padding: 80px;
+}
+
+#lower-heading {
+    color: dimgrey;
+}
+
+.upper-nav{
+    border-bottom: solid dimgrey 2px;
+    margin-right: 100px;
+    margin-left: 100px;
+    text-align: center;
+}
+
+.upper-nav li{
+    display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.upper-nav button{
+    color: dimgrey;
+    border: none;
+    background-color: white;
+    font-size: 18px;
+}
+
+.upper-nav button:hover {
+    cursor:pointer;
+    background-color: white;
+    color: black;
+    transition-duration: 0.2s;
+}
+
+#current-page{
+    color: black;
+}
+
+.main{
+    margin-left: 200px;
+    margin-right: 200px;
+    font-size: 1.3rem;
+}
+.intro{
+    width: 40%;
+    text-align: center;
+    display: inline-block;
+}
+
+.project-btn {
+    width:45%;
+    float: right;
+    display: inline-block;
+    height: 400px;
+}
+
+.project-btn button{
+    background:  url("http://localhost:63342/Teaching/ebony_clever.png") no-repeat;
+    background-size: contain;
+    width: 100%;
+    height:100%;
+    font-size: 3rem;
+    color: transparent;
+    transition-duration: 0.5s;
+    border: none;
+}
+
+.project-btn button:hover{
+    font-size: 3rem;
+    color: black;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    background: url("http://localhost:63342/Teaching/ebony_clever_blur.png") no-repeat;
+    background-size: contain;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+
+
