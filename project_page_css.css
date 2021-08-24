@@ -1,0 +1,131 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    background-color: white;
+}
+.container{
+    font-family: "Helvetica Neue";
+}
+
+.heading {
+    text-align: center;
+    padding: 80px;
+}
+
+#lower-heading {
+    color: dimgrey;
+}
+
+.upper-nav{
+    border-bottom: solid dimgrey 2px;
+    margin-right: 10%;
+    margin-left: 10%;
+    text-align: center;
+}
+
+.upper-nav li{
+    display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.upper-nav button{
+    color: dimgrey;
+    border: none;
+    background-color: white;
+    font-size: 18px;
+}
+
+.upper-nav button:hover {
+    cursor:pointer;
+    background-color: white;
+    color: black;
+    transition-duration: 0.2s;
+}
+
+#current-page{
+    color: black;
+}
+.forming-rig{
+    background: url("http://localhost:63342/Teaching/Rig_photo.png") no-repeat;
+    border-radius: 10px;
+    background-size: cover;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: auto;
+}
+
+.rig-description {
+    width: 20%;
+    margin-right: 70%;
+    text-align: center;
+    font-size: 1.2rem;
+    border: black 5px;
+}
+
+.rig-description p{
+    font-size: 1rem;
+    color: dimgrey;
+}
+
+
+.forming-rig-button button{
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 28px;
+    margin-left: 40px;
+    margin-top: 20%;
+    margin-bottom: 20px;
+    transition-duration: 0.5s;
+    border-radius: 5px;
+}
+
+.forming-rig-button button:hover{
+    margin-left: 60px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+.F35{
+    background: url("https://d2t1xqejof9utc.cloudfront.net/screenshots/pics/e01120e2cca01a9b77e1f1bdf3327ffb/large.jpg") no-repeat;
+    background-size: cover;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+
+}
+
+.F35-description{
+    width: 20%;
+    margin-right: 70%;
+    text-align: center;
+    font-size: 1.2rem;
+}
+.F35-description p{
+    font-size: 22px;
+    color: dimgrey;
+    font-size: 1rem;
+}
+
+.F35-button button{
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 28px;
+    margin-left: 40px;
+    margin-top: 20%;
+    margin-bottom: 20px;
+    transition-duration: 0.5s;
+    border-radius: 5px;
+}
+
+.F35-button button:hover{
+    margin-left: 60px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
