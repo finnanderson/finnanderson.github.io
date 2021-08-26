@@ -50,7 +50,7 @@ body, html {
     color: black;
 }
 .forming-rig{
-    background: url("http://localhost:63342/Teaching/Rig_photo.png") no-repeat;
+    background: url("Rig_photo.png") no-repeat;
     border-radius: 10px;
     background-size: cover;
     width: 80%;
