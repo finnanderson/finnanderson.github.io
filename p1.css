@@ -13,6 +13,7 @@ body, html {
 .heading {
     text-align: center;
     padding: 80px;
+    cursor: pointer;
 }
 
 #lower-heading {
@@ -20,9 +21,10 @@ body, html {
 }
 
 .upper-nav{
+    border-top: solid dimgrey 2px;
     border-bottom: solid dimgrey 2px;
-    margin-right: 100px;
-    margin-left: 100px;
+    margin-right: 10%;
+    margin-left: 10%;
     text-align: center;
 }
 
@@ -50,45 +52,66 @@ body, html {
 }
 
 .main{
-    margin-left: 200px;
-    margin-right: 200px;
+    margin-left: 10%;
+    margin-right: 10%;
+    width:80%;
     font-size: 1.3rem;
 }
 .intro{
-    width: 40%;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
     text-align: center;
     display: inline-block;
 }
 
 .project-btn {
-    width:45%;
-    float: right;
-    display: inline-block;
-    height: 400px;
+    width:100%;
+    display: block;
 }
 
-.project-btn button{
-    background:  url("ebony_clever.png") no-repeat;
-    background-size: contain;
-    width: 100%;
-    height:100%;
-    font-size: 3rem;
-    color: transparent;
-    transition-duration: 0.5s;
+.footer{
+    text-align: center;
+    padding: 50px;
+}
+
+.footer li{
+    display: inline;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.Linkedin{
+    width: 50px;
+    height: 50px;
     border: none;
+    background: url("Linkedin_outline.png") no-repeat;
+    background-size: cover;
 }
 
-.project-btn button:hover{
-    font-size: 3rem;
-    color: black;
+.Linkedin:hover{
     cursor: pointer;
-    transition-duration: 0.5s;
-    background: url("ebony_clever_blur.png") no-repeat;
-    background-size: contain;
-    border: none;
-    width: 100%;
-    height: 100%;
+    background: url("Linkedin_filled.png") no-repeat;
+    background-size: cover;
+    size: 50px 50px;
 }
+
+.Email{
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: url("Email_outline.png") no-repeat;
+    background-size: cover;
+}
+
+.Email:hover{
+    cursor: pointer;
+    background: url("Email_filled.png") no-repeat;
+    background-size: cover;
+    size: 50px 50px;
+}
+
+
 
 
 

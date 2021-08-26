@@ -13,6 +13,7 @@ body, html {
 .heading {
     text-align: center;
     padding: 80px;
+    cursor: pointer;
 }
 
 #lower-heading {
@@ -20,6 +21,7 @@ body, html {
 }
 
 .upper-nav{
+    border-top: solid dimgrey 2px;
     border-bottom: solid dimgrey 2px;
     margin-right: 100px;
     margin-left: 100px;
@@ -49,8 +51,9 @@ body, html {
     color: black;
 }
 .header{
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-top: 100px;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 .main{
@@ -59,10 +62,27 @@ body, html {
     margin-right: 10%;
 }
 
-.report{
-    height: 100%;
+.main_photo img{
+    width: 80%;
+    height: auto;
+    margin-right: 10%;
+    margin-left: 10%;
+    border-radius: 10px;
+}
 
+.overview{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
 
+.overview h6{
+    font-size: 1rem;
+    color: dimgrey;
+}
+
+.overview p{
+    font-size: 1rem;
 }
 
 .forming-report iframe{
@@ -76,3 +96,45 @@ body, html {
     overflow-scrolling: auto;
     border-radius: 10px;
 }
+
+.footer{
+    text-align: center;
+    padding: 50px;
+}
+
+.footer li{
+    display: inline;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.Linkedin{
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: url("Linkedin_outline.png") no-repeat;
+    background-size: cover;
+}
+
+.Linkedin:hover{
+    cursor: pointer;
+    background: url("Linkedin_filled.png") no-repeat;
+    background-size: cover;
+    size: 50px 50px;
+}
+
+.Email{
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: url("Email_outline.png") no-repeat;
+    background-size: cover;
+}
+
+.Email:hover{
+    cursor: pointer;
+    background: url("Email_filled.png") no-repeat;
+    background-size: cover;
+    size: 50px 50px;
+}
+

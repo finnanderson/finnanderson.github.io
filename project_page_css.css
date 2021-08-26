@@ -12,6 +12,7 @@ body, html {
 .heading {
     text-align: center;
     padding: 80px;
+    cursor: pointer;
 }
 
 #lower-heading {
@@ -19,6 +20,7 @@ body, html {
 }
 
 .upper-nav{
+    border-top: solid dimgrey 2px;
     border-bottom: solid dimgrey 2px;
     margin-right: 10%;
     margin-left: 10%;
@@ -48,7 +50,7 @@ body, html {
     color: black;
 }
 .forming-rig{
-    background: url("Rig_photo.png") no-repeat;
+    background: url("http://localhost:63342/Teaching/Rig_photo.png") no-repeat;
     border-radius: 10px;
     background-size: cover;
     width: 80%;
@@ -89,43 +91,44 @@ body, html {
     cursor: pointer;
 }
 
-.F35{
-    background: url("https://d2t1xqejof9utc.cloudfront.net/screenshots/pics/e01120e2cca01a9b77e1f1bdf3327ffb/large.jpg") no-repeat;
-    background-size: cover;
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 80%;
-    height: auto;
-    border-radius: 10px;
-
-}
-
-.F35-description{
-    width: 20%;
-    margin-right: 70%;
+.footer{
     text-align: center;
-    font-size: 1.2rem;
-}
-.F35-description p{
-    font-size: 22px;
-    color: dimgrey;
-    font-size: 1rem;
+    padding: 50px;
 }
 
-.F35-button button{
+.footer li{
+    display: inline;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.Linkedin{
+    width: 50px;
+    height: 50px;
     border: none;
-    background-color: black;
-    color: white;
-    font-size: 28px;
-    margin-left: 40px;
-    margin-top: 20%;
-    margin-bottom: 20px;
-    transition-duration: 0.5s;
-    border-radius: 5px;
+    background: url("Linkedin_outline.png") no-repeat;
+    background-size: cover;
 }
 
-.F35-button button:hover{
-    margin-left: 60px;
-    transition-duration: 0.5s;
+.Linkedin:hover{
     cursor: pointer;
+    background: url("Linkedin_filled.png") no-repeat;
+    background-size: cover;
+    size: 50px 50px;
 }
+
+.Email{
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: url("Email_outline.png") no-repeat;
+    background-size: cover;
+}
+
+.Email:hover{
+    cursor: pointer;
+    background: url("Email_filled.png") no-repeat;
+    background-size: cover;
+    size: 50px 50px;
+}
+
