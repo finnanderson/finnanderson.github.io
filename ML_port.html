@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Finn Anderson</title>
+    <link rel="stylesheet" type="text/css" href="ML_css.css">
+    <script src="lolight-1.4.0.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="heading" onclick="location.href='index.html'">
+        <h1>Finn Anderson</h1>
+        <h2 id="lower-heading">Engineering Undergraduate</h2>
+        <h3 id="lower-heading">University of Bristol 2022</h3>
+        </div>
+    <div class="upper-nav">
+        <ul>
+            <li><button onclick="location.href='project_page.html'">Work</button></li>
+            <li><button id="current-page" onclick="location.href='index.html'">About</button></li>
+            <li><button onclick="location.href='F_Anderson_CV.pdf'">Resume</button></li>
+        </ul>
+    </div>
+    <div class = "header">
+        <h1>Machine learning modelling</h1>
+        <p>Using machine learning models to predict the outcome of titanic passengers</p>
+    </div>
+    <div class="main">
+        <code>In [1]</code>
+        <div class="code">
+        <pre class="lolight"><code>
+            # Re-creating the same model, where instead of using the average for the mean, all NAN is deleted from the model
+            # In the test model, they will be averaged
+
+            # Import the libraries
+            import numpy as np
+            import pandas as pd
+            from sklearn.impute import SimpleImputer
+            from sklearn.compose import ColumnTransformer
+            from sklearn.preprocessing import OneHotEncoder
+            from sklearn.preprocessing import StandardScaler
+            from sklearn.ensemble import RandomForestClassifier
+            from sklearn.model_selection import train_test_split
+            from sklearn.metrics import accuracy_score
+            from sklearn.neighbors import KNeighborsClassifier
+            from sklearn.naive_bayes import GaussianNB
+            from sklearn.svm import SVC
+            from sklearn.linear_model import LogisticRegression
+
+            def DataDrop(InputData):
+                # This function removes unnecessary columns returning data, excluding those columns
+                InputData.drop('Cabin', inplace=True, axis=1)
+                InputData.drop('Name', inplace=True, axis=1)
+                InputData.drop('PassengerId', inplace=True, axis=1)
+                return InputData
+
+
+            def DataMean(DataMissing):
+                # This function returns the missing data in the form of the mean of the column
+                imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
+                imputer.fit(DataMissing[:, 2:7])
+                DataMissing[:, 2:7] = imputer.transform(DataMissing[:, 2:7])
+                return DataMissing
+
+
+            def Encode(RawData):
+                # This function uses a one hot encoder to replace the string characters with encoded vector
+                ct = ColumnTransformer(transformers=[('encoder', OneHotEncoder(), [1])], remainder='passthrough')
+                RawData = np.array(ct.fit_transform(RawData))
+                ct2 = ColumnTransformer(transformers=[('encoder', OneHotEncoder(), [8])], remainder='passthrough')
+                RawData = np.array(ct2.fit_transform(RawData))
+                return RawData
+
+
+            def FeatureScaling(Raw_train, Raw_test):
+                # This function returns the normalised data
+                sc = StandardScaler()
+                Raw_train = sc.fit_transform(Raw_train)
+                Raw_test = sc.fit_transform(Raw_test)
+                return Raw_train, Raw_test
+
+            def TicketChange(TicketData):
+                Temp_len = TicketData.shape
+                for i in range(0,Temp_len[0]):
+                Ticket_len = len(TicketData[i][5])
+                TicketData[i][5] = Ticket_len
+                return TicketData
+
+            # Import the data
+            data = pd.read_csv('train_copy.csv')
+            print(data.dtypes)
+            print(data.isnull().sum())
+
+        </code></pre>
+        </div>
+        <code>Out [1]</code>
+        <div class="out">
+
+        <samp class="output">
+            PassengerId      int64<br>
+            Survived         int64<br>
+            Pclass           int64<br>
+            Name            object<br>
+            Sex             object<br>
+            Age            float64<br>
+            SibSp            int64<br>
+            Parch            int64<br>
+            Ticket          object<br>
+            Fare           float64<br>
+            Cabin           object<br>
+            Embarked        object<br>
+            dtype:          object<br>
+            <br>
+            PassengerId      0<br>
+            Survived         0<br>
+            Pclass           0<br>
+            Name             0<br>
+            Sex              0<br>
+            Age            177<br>
+            SibSp            0<br>
+            Parch            0<br>
+            Ticket           0<br>
+            Fare             0<br>
+            Cabin          687<br>
+            Embarked         2<br>
+        </samp>
+        </div>
+        <code>In [2]</code>
+        <div class="code">
+        <pre class="lolight">
+            <code>
+
+
+            # Remove Rows where there is a minimum of 2 missing data values within that row
+            data = data.dropna(thresh=2)
+            # Remove rows with missing Embarked data, 2 values are insignificant to the model
+            data = data.dropna(subset=['Embarked'])
+            print(data.isnull().sum())
+            # Calling drop data function to remove insignificant data
+            data = DataDrop(data)
+
+            # Split the data into features and dependant variables
+            X = data.iloc[:, 1:].values
+            y = data.iloc[:,0].values
+            # Setting np value to print whole matrix
+            np.set_printoptions(threshold=np.inf)
+            # Split the data into train and test data sets
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
+
+            print(X_train)
+            # Change the ticket column to the length of ticket
+            X_train = TicketChange(X_train)
+            X_test = TicketChange(X_test)
+
+            # Fill in the Null columns
+            X_train = DataMean(X_train)
+            X_test = DataMean(X_test)
+
+            # Encode the genders and embarked columns, using 1 hot-encoder
+            X_train = Encode(X_train)
+            X_test = Encode(X_test)
+
+            # From reviewing printed values, an unnecessary encoded column was created
+            # X_train = np.delete(X_train, 3, axis=1)
+
+            # Scale the features prior to training the model
+            X_train, X_test = FeatureScaling(X_train, X_test)
+
+            # For loop to find the greatest accuracy of the RF dependent on N_estimators
+            N_estimators=[]
+            for r in range(10, 300):
+                N_estimators.append([0 for c in range(0, 2)])
+            # [0] will contain the number of estimators
+            # [1] will contain the accuracy corresponding to N_estimator[0]
+            for rf in range(10,300):
+                RF_model_test = RandomForestClassifier(n_estimators=rf, criterion='entropy', random_state=42)
+                RF_model_test.fit(X_train, y_train)
+                RF_pred_test = RF_model_test.predict(X_test)
+                N_estimators[(rf-10)][0] = rf
+                N_estimators[(rf-10)][1] = accuracy_score(y_test, RF_pred_test)
+
+            # Find the highest accuracy and the min N_estimators corresponding to which
+            min_rf = 0.4
+            max_tf = 0
+            for top in range(0,len(N_estimators)):
+                if N_estimators[top][1] > min_rf:
+                    min_rf = N_estimators[top][1]
+                    max_tf = N_estimators[top][0]
+            print('\n')
+            print('----------------------------------')
+            print('\n')
+            # Train random forest model
+            RF_model = RandomForestClassifier(n_estimators=max_tf, criterion='entropy', random_state=42)
+            RF_model.fit(X_train, y_train)
+            RF_pred = RF_model.predict(X_test)
+            print('Random forest accuracy: ' + str(accuracy_score(y_test, RF_pred)))
+            print('Number of estimators used: ' + str(max_tf))
+            print('\n')
+            print('----------------------------------')
+            print('\n')
+            # Finding the ideal number of neighbours for K_NN model
+            N_NN=[]
+            for r in range(5, 150):
+                N_NN.append([0 for c in range(0, 2)])
+            # [0] will contain the number of estimators
+            # [1] will contain the accuracy according to that
+            for NN in range(5,150):
+                KNN_model_test = RandomForestClassifier(n_estimators=NN, criterion='entropy', random_state=42)
+                KNN_model_test.fit(X_train, y_train)
+                KNN_pred_test = KNN_model_test.predict(X_test)
+                N_NN[(NN-5)][0] = NN
+                N_NN[(NN-5)][1] = accuracy_score(y_test, KNN_pred_test)
+
+            # Search for loop to find the highest corresponding number of neighbours
+            min_nn = 0.4
+            max_nn = 0
+            for top in range(0,len(N_NN)):
+                if N_NN[top][1] > min_nn:
+                    min_nn = N_NN[top][1]
+                    max_nn = N_NN[top][0]
+
+            # Training KNN model
+            KNN_model = KNeighborsClassifier(n_neighbors = max_nn, metric = 'minkowski', p = 2)
+            KNN_model.fit(X_train, y_train)
+            KNN_pred = KNN_model.predict(X_test)
+            print('KNN accuracy: ' + str(accuracy_score(y_test,KNN_pred)))
+            print('Number of neighbours: ' + str(max_nn))
+            print('\n')
+            print('----------------------------------')
+            print('\n')
+
+            # Naive bayes model
+            Bayes_model = GaussianNB()
+            Bayes_model.fit(X_train, y_train)
+            Bayes_pred = Bayes_model.predict(X_test)
+            print('Bayes accuracy:')
+            print(accuracy_score(y_test, Bayes_pred))
+            print('\n')
+            print('----------------------------------')
+            print('\n')
+
+            # SVM Model
+            SVM_model = SVC(kernel = 'rbf', random_state = 0)
+            SVM_model.fit(X_train, y_train)
+            SVM_pred = SVM_model.predict(X_test)
+            print('SVM accuracy:')
+            print(accuracy_score(y_test, SVM_pred))
+            print('\n')
+            print('----------------------------------')
+            print('\n')
+
+            # Regression model
+            Reg_model = LogisticRegression(random_state = 0)
+            Reg_model.fit(X_train, y_train)
+            Reg_pred = Reg_model.predict(X_test)
+            print('Logistic regression accuracy:')
+            print(accuracy_score(y_test,Reg_pred))
+            print('\n')
+            print('----------------------------------')
+            print('\n')
+
+            # Generating a ensamble model to see accuracy of predictions
+            Result = []
+            for r in range(0, (len(RF_pred))):
+                Result.append([0 for c in range(0, 1)])
+            for i in range(0,(len(SVM_pred))):
+                KNN_temp = int(KNN_pred[i])
+                Bayes_temp = int(Bayes_pred[i])
+                Random_temp = int(RF_pred[i])
+                SVM_temp = int(SVM_pred[i])
+                Reg_temp = int(Reg_pred[i])
+                Avg = ((KNN_temp+Bayes_temp+Random_temp+SVM_temp+Reg_temp)/5)
+                if Avg > 0.5:
+                    Result[i]=1
+                else:
+                    Result[i]=0
+
+            print('Basic ensamble accuracy:')
+            print(accuracy_score(y_test,Result))
+
+            </code>
+        </pre>
+        </div>
+        <code>Out [2]</code>
+        <div class="out">
+        <samp>
+            ----------------------------------<br>
+            Random forest accuracy: 0.8033707865168539<br>
+            Number of estimators used: 11<br>
+            ----------------------------------<br>
+            KNN accuracy: 0.7696629213483146<br>
+            Number of neighbours: 11<br>
+            ----------------------------------<br>
+            Bayes accuracy:<br>
+            0.7640449438202247<br>
+            ----------------------------------<br>
+            SVM accuracy:<br>
+            0.8202247191011236<br>
+            ----------------------------------<br>
+            Logistic regression accuracy:<br>
+            0.8033707865168539<br>
+            ----------------------------------<br>
+        </samp>
+        </div>
+        <code>In [3]</code>
+        <div class="code">
+        <pre class="lolight"><code>
+
+            # Most accurate is the SVM kernel mode, Use this to predict the test results
+            # Import the test data
+            test_data = pd.read_csv('test.csv')
+            print(test_data.dtypes)
+            print(test_data.isnull().sum())
+            # Retrieving the Passenger ID for expected kaggle format
+            PassengerID = test_data.iloc[:, 0].values
+            test_data = DataDrop(test_data)
+            # Apply same rules
+            X_test_final = test_data.iloc[:, :].values
+            X_test_final = TicketChange(X_test_final)
+            X_test_final = DataMean(X_test_final)
+            X_test_final = Encode(X_test_final)
+            X_train, X_test_final = FeatureScaling(X_train, X_test_final)
+            # SVM Model
+            SVM_model_test = SVC(kernel = 'rbf', random_state = 0)
+            SVM_model_test.fit(X_train, y_train)
+            SVM_pred_test = SVM_model.predict(X_test_final)
+
+            Final_result=[]
+            for r in range(0, (len(PassengerID)+1)):
+                    Final_result.append([0 for c in range(0, 2)])
+            Final_result[0][0]='PassengerID'
+            Final_result[0][1]='Survived'
+            for i in range(0,len(PassengerID)):
+                Final_result[(i+1)][0]=PassengerID[i]
+                Final_result[(i+1)][1]=SVM_pred_test[i]
+            print(Final_result)
+            pd.DataFrame(Final_result).to_csv("output_SVM.csv")
+
+            </code>
+        </pre>
+        </div>
+        <code>Out [3]</code>
+        <div class="out">
+        </pre>
+        <samp>
+            [['PassengerID', 'Survived'], [892, 0]<br>
+            ...<br>
+            [1306, 1], [1307, 0], [1308, 0], [1309, 0]]<br>
+        </samp>
+        </div>
+    </div>
+     <div class="footer">
+        <ul>
+            <li><button class="Linkedin" onclick="location.href='https://www.linkedin.com/in/finnanderson7?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3B2axXK9AwQ%2B2OK6M%2FkcxHzg%3D%3D'"></button></li>
+            <li><button class="Email" onclick="location.href='mailto:finns.anderson@gmail.com'"></button></li>
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>

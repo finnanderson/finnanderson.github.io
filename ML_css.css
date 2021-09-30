@@ -5,10 +5,13 @@ body, html {
     margin: 0px;
     background-color: white;
 }
+
 .container{
     font-family: "Helvetica Neue";
 }
-
+.output{
+    display: block;
+}
 .heading {
     text-align: center;
     padding: 80px;
@@ -22,8 +25,8 @@ body, html {
 .upper-nav{
     border-top: solid dimgrey 2px;
     border-bottom: solid dimgrey 2px;
-    margin-right: 10%;
-    margin-left: 10%;
+    margin-right: 100px;
+    margin-left: 100px;
     text-align: center;
 }
 
@@ -49,87 +52,29 @@ body, html {
 #current-page{
     color: black;
 }
-.forming-rig{
-    background: url("Rig_photo.png") no-repeat;
-    border-radius: 10px;
-    background-size: cover;
-    width: 80%;
+.header{
+    margin-top: 100px;
+    margin-left: 10%;
+    margin-right: 25%;
+}
+
+.main{
+    margin-top: 60px;
     margin-left: 10%;
     margin-right: 10%;
-    height: auto;
 }
-
-.rig-description {
-    width: 20%;
-    margin-right: 70%;
-    text-align: center;
-    font-size: 1.2rem;
-    border: black 5px;
-}
-
-.rig-description p{
-    font-size: 1rem;
-    color: dimgrey;
-}
-
-
-.forming-rig-button button{
-    border: none;
-    background-color: black;
-    color: white;
-    font-size: 28px;
-    margin-left: 40px;
-    margin-top: 20%;
-    margin-bottom: 20px;
-    transition-duration: 0.5s;
-    border-radius: 5px;
-}
-
-.forming-rig-button button:hover{
-    margin-left: 60px;
-    transition-duration: 0.5s;
-    cursor: pointer;
-}
-.titanic{
-    background: url("Titan_code.png") no-repeat;
+.code{
+    background: lightgray;
+    border: black 2px solid;
     border-radius: 10px;
-    background-size: cover;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-    height: auto;
-
+    margin: 20px;
 }
-.titanic-description{
-    width: 20%;
-    margin-right: 70%;
-    text-align: center;
-    font-size: 1.2rem;
-    border: black 5px;
-
-}
-.titanic-description p{
-    font-size: 1rem;
-    color: dimgrey;
-
-}
-.titanic-button button{
-    border: none;
-    background-color: black;
+.out{
+    margin: 20px;
+    padding: 30px 0 30px 50px;
+    background: dimgrey;
+    border-radius: 10px;
     color: white;
-    font-size: 28px;
-    margin-left: 40px;
-    margin-top: 20%;
-    margin-bottom: 20px;
-    transition-duration: 0.5s;
-    border-radius: 5px;
-
-}
-.titanic-button button:hover{
-    margin-left: 60px;
-    transition-duration: 0.5s;
-    cursor: pointer;
-
 }
 
 .footer{
